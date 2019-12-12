@@ -26,7 +26,7 @@ class ClassroomService {
   async delete(id) {
     let data = await _repository.findOneAndRemove({ _id: id });
     if (!data) {
-      throw new ApiError("Invalid Update ID", 400);
+      throw new ApiError("Invalid ID", 400);
     }
   }
 }
