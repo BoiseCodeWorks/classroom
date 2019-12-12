@@ -37,4 +37,20 @@ export default class ClassroomsController {
       next(error);
     }
   }
+  async edit(req, res, next) {
+    try {
+      let data = await classroomsService.edit(req.params.id, req.body);
+      return res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async delete(req, res, next) {
+    try {
+      await classroomsService.delete(req.params.id);
+      return res.send("Successfully Deleted");
+    } catch (error) {
+      next(error);
+    }
+  }
 }

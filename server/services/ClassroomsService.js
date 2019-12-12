@@ -9,7 +9,11 @@ class ClassroomService {
     return await _repository.find({});
   }
   async getById(id) {
-    return await _repository.findById(id);
+    let data = await _repository.findById(id);
+    if (!data) {
+      throw new ApiError("Invalid ID", 400);
+    }
+    return data;
   }
   async create(rawData) {
     return await _repository.create(rawData);
