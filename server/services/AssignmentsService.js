@@ -15,6 +15,9 @@ class AssignmentsService {
     }
     return data;
   }
+  async getAssignmentsByClassroomId(classroomId) {
+    return await _repository.find({ classroomId });
+  }
   async create(rawData) {
     return await _repository.create(rawData);
   }

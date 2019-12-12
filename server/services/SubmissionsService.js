@@ -15,6 +15,13 @@ class SubmissionsService {
     }
     return data;
   }
+
+  async getSubmissionsByClassroomId(classroomId) {
+    return await _repository
+      .find({ classroomId })
+      .populate("studentId", "-name")
+      .populate("classroomId", "title");
+  }
   async create(rawData) {
     return await _repository.create(rawData);
   }

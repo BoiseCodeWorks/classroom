@@ -15,6 +15,9 @@ class StudentsService {
     }
     return data;
   }
+  async getStudentsByClassroomId(classroomId) {
+    return await _repository.find({ classroomId });
+  }
   async create(rawData) {
     return await _repository.create(rawData);
   }
