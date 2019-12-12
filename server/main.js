@@ -3,7 +3,10 @@ import express from "express";
 import cors from "cors";
 import bp from "body-parser";
 import DbContext from "./db/dbConfig";
-import classroomsController from "./controllers/ClassroomsController";
+import ClassroomsController from "./controllers/ClassroomsController";
+import StudentsController from "./controllers/StudentsController";
+import AssignmentsController from "./controllers/AssignmentsController";
+import SubmissionsController from "./controllers/SubmissionsController";
 
 const port = process.env.PORT || 3000;
 
@@ -38,7 +41,10 @@ server.use(bp.json());
 //NOTE we have to import access to our controllers
 
 //NOTE remember the forward slash at the start of your path!
-server.use("/api/classrooms", new classroomsController().router);
+server.use("/api/classrooms", new ClassroomsController().router);
+server.use("/api/students", new StudentsController().router);
+server.use("/api/assignments", new AssignmentsController().router);
+server.use("/api/submissions", new SubmissionsController().router);
 
 //NOTE Everything below this line always stays the same
 

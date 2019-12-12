@@ -1,13 +1,39 @@
 import mongoose from "mongoose";
-import Value from "../models/Value";
+import Student from "../models/Student";
+import ApiError from "../utils/ApiError";
 
-const _repository = mongoose.model("Value", Value);
+const _repository = mongoose.model("Student", Student);
 
-class ValueService {
+class StudentsService {
   async getAll() {
     return await _repository.find({});
   }
+  async getById(id) {
+    let data = await _repository.findById(id);
+    if (!data) {
+      throw new ApiError("Invalid ID", 400);
+    }
+    return data;
+  }
+  async create(rawData) {
+    return await _repository.create(rawData);
+  }
+  async edit(id, update) {
+    let data = await _repository.findOneAndUpdate({ _id: id }, update, {
+      new: true
+    });
+    if (!data) {
+      throw new ApiError("Invalid Update ID", 400);
+    }
+    return data;
+  }
+  async delete(id) {
+    let data = await _repository.findOneAndRemove({ _id: id });
+    if (!data) {
+      throw new ApiError("Invalid ID", 400);
+    }
+  }
 }
 
-const valueService = new ValueService();
-export default valueService;
+const studentsService = new StudentsService();
+export default studentsService;
