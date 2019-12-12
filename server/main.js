@@ -44,7 +44,7 @@ server.use("/api/values", new ValuesController().router);
 
 //NOTE Default error handler, catches all routes with an error attached
 server.use((error, req, res, next) => {
-  res.status(error.status).send({ error: { message: error.message } });
+  res.status(error.status || 400).send({ error: { message: error.message } });
 });
 
 //NOTE Catch all to insure to return 404 if recieved a bad route
